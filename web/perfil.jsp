@@ -23,12 +23,9 @@
 
     //busca os dados do usuário recebido por parametro ou da sessão
     Usuario user = new Usuario();
-    boolean encontrado=false;
     for(Usuario u: Usuario.dados){
         if(u.getId() == userId){
             user = u;
-            encontrado=true;
-            //break;
         }
     }
 %>
@@ -45,51 +42,43 @@
     <body>        
         
         <div class="container">                        
-            
-            <% if(!encontrado){ %>
-                <h1>Erro!</h1>
-                
-                <span>Os dados do usuário não foram encontrados! </span>
-                
-                <a class="btn btn-default" href="index.jsp" role="button">Voltar para o Login</a>
-            <% } else { %>                            
+                                      
 
-                <header>
-                    <h1><%=user.getNome()%></h1>
+            <header>
+                <h1><%=user.getNome()%></h1>
 
-                    <p><%=user.getBiografia()%></p>
-                </header> 
+                <p><%=user.getBiografia()%></p>
+            </header> 
 
-                <% if(user.getProjetos() != null){ %>
-                <section>                                 
+            <% if(user.getProjetos() != null){ %>
+            <section>                                 
 
-                    <h2>Projetos</h2>
+                <h2>Projetos</h2>
 
-                    <% for(Projeto p: user.getProjetos()){ %>
-                        <section class="card">
-                            <h4><%=p.getTitulo()%></h4>
+                <% for(Projeto p: user.getProjetos()){ %>
+                    <section class="card">
+                        <h4><%=p.getTitulo()%></h4>
 
-                            <figure>
-                                <a href="<%=p.getCliente()%>">
-                                    <img src="<%=p.getImagem()%>"></img>
-                                </a>
-                            </figure>
+                        <figure>
+                            <a href="<%=p.getCliente()%>">
+                                <img src="<%=p.getImagem()%>"></img>
+                            </a>
+                        </figure>
 
-                            <p><%=p.getResumo()%></p>
+                        <p><%=p.getResumo()%></p>
 
 
-                            <a class="externo" href="<%=p.getLink()%>">Acesse o Projeto</a>
-                        </section>                                    
-                    <% } %>
-                </section>
-
-                <% } else if(logado) { %>
-
-                <a class="btn btn-default" href="projeto.jsp" role="button">Adicione Projetos ao seu Perfil</a>
-
+                        <a class="externo" href="<%=p.getLink()%>">Acesse o Projeto</a>
+                    </section>                                    
                 <% } %>
-            
+            </section>
+
+            <% } else if(logado) { %>
+
+            <a class="btn btn-default" href="projeto.jsp" role="button">Adicione Projetos ao seu Perfil</a>
+
             <% } %>
+            
         </div>
                 
         <script src="js/jquery-3.5.1.min.js" ></script>
